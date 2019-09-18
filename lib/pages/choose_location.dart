@@ -7,16 +7,6 @@ class ChooseLocation extends StatefulWidget {
 
 class _ChooseLocationState extends State<ChooseLocation> {
 
-  void get_data() {
-    
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    print('init state func ran');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
