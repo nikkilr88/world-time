@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
                       await Navigator.pushNamed(context, '/location');
 
                   setState(() {
-                    timeData = newTimeData;
+                    timeData = newTimeData == null ? {} : newTimeData;
                   });
                 },
                 icon: Icon(Icons.edit_location),
