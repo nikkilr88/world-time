@@ -6,9 +6,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map timeData;
   String backgroundImage;
   Color backgroundColor;
+  Map timeData = {};
 
   TextStyle setTextStyle(
       double fontSize, FontWeight fontWeight, bool isDaytime) {

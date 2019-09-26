@@ -7,9 +7,9 @@ class WorldTime {
   String time;
   String flag;
   String url;
-  bool isDaytime;
+  bool isDaytime = true;
 
-  WorldTime({this.location, this.time, this.flag, this.url});
+  WorldTime({this.location, this.flag, this.url});
 
   Future<void> getTime() async {
     try {
@@ -23,10 +23,10 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: offset));
 
-      this.isDaytime = now.hour > 6 && now.hour < 20 ? true : false;
-      this.time = DateFormat.jm().format(now);
+      isDaytime = now.hour > 6 && now.hour < 20 ? true : false;
+      time = DateFormat.jm().format(now);
     } catch (error) {
-      this.time = 'Something went wrong while fetching the time.';
+      time = 'Something went wrong while fetching the time.';
     }
   }
 }
