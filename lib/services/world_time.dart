@@ -29,4 +29,11 @@ class WorldTime {
       time = 'Something went wrong while fetching the time.';
     }
   }
+
+  Map get getTimeData => {
+        'location': location,
+        'flag': flag,
+        'time': time,
+        'isDaytime': isDaytime
+      };
 }
