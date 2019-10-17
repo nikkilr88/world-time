@@ -12,7 +12,8 @@ class _HomeState extends State<Home> {
   Map timeData = {};
 
   void _updateTimeWithNewLocation() async {
-    dynamic newTimeData = await Navigator.pushNamed(context, '/location');
+    dynamic newTimeData = await Navigator.pushNamed(context, '/location',
+        arguments: {'location': timeData['location']});
 
     setState(() {
       timeData = newTimeData == null ? timeData : newTimeData;
