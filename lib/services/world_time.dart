@@ -34,6 +34,7 @@ class WorldTime {
         'location': location,
         'flag': flag,
         'time': time,
-        'isDaytime': isDaytime
+        'isDaytime': isDaytime,
+        'url': url
       };
 }

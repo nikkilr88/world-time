@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_time/services/world_time.dart';
 import 'package:world_time/utils/text-styles.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +18,19 @@ class _HomeState extends State<Home> {
 
     setState(() {
       timeData = newTimeData == null ? timeData : newTimeData;
+    });
+  }
+
+  void _refreshTime() async {
+    WorldTime worldTime = WorldTime(
+        location: timeData['location'],
+        flag: timeData['flag'],
+        url: timeData['url']);
+
+    await worldTime.getTime();
+
+    setState(() {
+      timeData = worldTime.getTimeData;
     });
   }
 
@@ -49,7 +63,6 @@ class _HomeState extends State<Home> {
       ),
       // ! Body
       body: Container(
-        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/$backgroundImage'), fit: BoxFit.cover),
@@ -58,10 +71,24 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              timeData['location'],
-              style:
-                  setTextStyle(20.0, FontWeight.normal, timeData['isDaytime']),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  timeData['location'],
+                  style: setTextStyle(
+                      20.0, FontWeight.normal, timeData['isDaytime']),
+                ),
+                IconButton(
+                  color: setTextStyle(null, null, timeData['isDaytime']).color,
+                  icon: Icon(
+                    Icons.refresh,
+                    size: 18.0,
+                  ),
+                  onPressed: _refreshTime,
+                )
+              ],
             ),
             SizedBox(height: 15),
             Text(
