@@ -41,27 +41,30 @@ class _ChooseLocationState extends State<ChooseLocation> {
         backgroundColor: Colors.white,
         elevation: 1,
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) {
-          return Divider(
-            color: Colors.grey[300],
-          );
-        },
-        itemCount: locations.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              updateTime(index);
-            },
-            title: Text(locations[index].location),
-            leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/${locations[index].flag}'),
-            ),
-            trailing: currentLocation == locations[index].location
-                ? Icon(Icons.check)
-                : null,
-          );
-        },
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ListView.separated(
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.grey[300],
+            );
+          },
+          itemCount: locations.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              onTap: () {
+                updateTime(index);
+              },
+              title: Text(locations[index].location),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage('assets/${locations[index].flag}'),
+              ),
+              trailing: currentLocation == locations[index].location
+                  ? Icon(Icons.check)
+                  : null,
+            );
+          },
+        ),
       ),
     );
   }
