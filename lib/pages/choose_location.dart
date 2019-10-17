@@ -24,24 +24,32 @@ class _ChooseLocationState extends State<ChooseLocation> {
       WorldTime worldTime = locations[index];
       await worldTime.getTime();
 
-      Navigator.pop(context, {
-        'location': worldTime.location,
-        'flag': worldTime.flag,
-        'time': worldTime.time,
-        'isDaytime': worldTime.isDaytime
-      });
+      Navigator.pop(context, worldTime.getTimeData);
     }
+
+    Map args = ModalRoute.of(context).settings.arguments;
+    String currentLocation = args['location'];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose location'),
+        title: Text(
+          'Choose location',
+          style: TextStyle(color: Colors.black54),
+        ),
+        iconTheme: IconThemeData(color: Colors.black54),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 1,
       ),
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: (context, index) {
+          return Divider(
+            color: Colors.grey[300],
+          );
+        },
         itemCount: locations.length,
         itemBuilder: (context, index) {
-          return Card(
-              child: ListTile(
+          return ListTile(
             onTap: () {
               updateTime(index);
             },
@@ -49,7 +57,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
             leading: CircleAvatar(
               backgroundImage: AssetImage('assets/${locations[index].flag}'),
             ),
-          ));
+            trailing: currentLocation == locations[index].location
+                ? Icon(Icons.check)
+                : null,
+          );
         },
       ),
     );
